@@ -1,0 +1,240 @@
+<mujoco model="Mobile_Aloha">
+  <compiler eulerseq="XYZ" meshdir="meshes_mujoco/" angle='radian'/>
+  <option gravity="0 0 -9.8000000000000007" wind="0 0 0" magnetic="6.0000000000000002e-06 2.3e-05 -4.1999999999999998e-05"/>
+  <default>
+    <default class="unused"/>
+  </default>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2=".6 .8 1" width="256" height="256"/>
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1="1 1 1" rgb2=".2 .3 .4"/>
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance=".2"/>
+    <mesh name="table" scale="0.001 0.001 0.001" file="table.STL"/>
+    <material name="material_1" class="unused" emission="0" specular="0" rgba="0 0 0 1"/>
+    <mesh name="box1_Link" class="unused" file="box1_Link.STL" scale="1 1 1"/>
+    <mesh name="box2_Link" class="unused" file="box2_Link.STL" scale="1 1 1"/>
+    <mesh name="tracer_base_link_no_wheel" class="unused" file="tracer_base_link_no_wheel.stl" scale="1 1 1"/>
+    <mesh name="base_link" class="unused" file="base_link.STL" scale="1 1 1"/>
+    <mesh name="castor_joint" class="unused" file="castor_joint.stl" scale="1 1 1"/>
+    <mesh name="castor" class="unused" file="castor.stl" scale="1 1 1"/>
+    <mesh name="tracer_wheel" class="unused" file="tracer_wheel.stl" scale="1 1 1"/>
+    <mesh name="link1" class="unused" file="link1.STL" scale="1 1 1"/>
+    <mesh name="link2" class="unused" file="link2.STL" scale="1 1 1"/>
+    <mesh name="link3" class="unused" file="link3.STL" scale="1 1 1"/>
+    <mesh name="link4" class="unused" file="link4.STL" scale="1 1 1"/>
+    <mesh name="link5" class="unused" file="link5.STL" scale="1 1 1"/>
+    <mesh name="link6" class="unused" file="link6.STL" scale="1 1 1"/>
+    <mesh name="link7" class="unused" file="link7.STL" scale="1 1 1"/>
+    <mesh name="link8" class="unused" file="link8.STL" scale="1 1 1"/>
+  </asset>
+  <worldbody>
+    <light diffuse=".7 .7 .7" pos="1 0 5" dir="0 0 -1"/>
+
+    <!-- <geom type="plane" size="2 2 1" rgba="1 1 1 1"/> -->
+    <body name="floor">
+      <geom type="plane" size="10 10 .01" material="grid"/>
+    </body>
+  
+    <body name="table1" pos="0.35 0.65 0" quat="0.707 0.707 0 0">
+      <geom type="mesh" group="1" density="0.950" rgba="0.79216 0.81961 0.93333 1" mesh="table"/>
+    </body>
+
+    <body name="table2" pos="-1.3 1.65 0" quat="0.707 0.707 0 0">
+      <geom type="mesh" group="1" density="0.950" rgba="0.79216 0.81961 0.93333 1" mesh="table"/>
+    </body>
+
+    <body name="footprint" pos="0 0 0" euler="0 -0 0">
+      <inertial pos="0.014324999999999999 0.021430999999999999 0.15917000000000001" mass="137.88800000000001" fullinertia="1.3725700000000001 1.45255 0.63467499999999999 -0.0013265200000000001 0.096461099999999994 0.026028300000000001"/>
+      <geom name="footprint_fixed_joint_lump__box1_Link_collision" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0 0 0.14999999999999999"  quat="0.999688 -0.0249974 0 0" mesh="box1_Link"/>
+      <geom name="footprint_fixed_joint_lump__box2_Link_collision_1" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0 0 0.14999999999999999"  mesh="box2_Link"/>
+      <geom name="footprint_fixed_joint_lump__base_link_collision_2" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0 0 0.14999999999999999" euler="1.57 -0 0" mesh="tracer_base_link_no_wheel"/>
+      <geom name="footprint_fixed_joint_lump__fl_base_link_collision_3" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0.23300000000000001 0.29999999999999999 0.75" euler="0 -0 0" mesh="base_link"/>
+      <geom name="footprint_fixed_joint_lump__fr_base_link_collision_4" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0.23300000000000001 -0.307 0.75" euler="0 -0 0" mesh="base_link"/>
+
+      <geom name="footprint_fixed_joint_lump__box1_Link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0.14999999999999999"  quat="0.999688 -0.0249974 0 0" mesh="box1_Link"/>
+      <geom name="footprint_fixed_joint_lump__box2_Link_visual_1" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0.14999999999999999"  mesh="box2_Link"/>
+      <geom name="footprint_fixed_joint_lump__base_link_visual_2" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0.14999999999999999" euler="1.57 -0 0" mesh="tracer_base_link_no_wheel"/>
+      <geom name="footprint_fixed_joint_lump__fl_base_link_visual_3" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0.23300000000000001 0.29999999999999999 0.75" euler="0 -0 0" mesh="base_link"/>
+      <geom name="footprint_fixed_joint_lump__fr_base_link_visual_4" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0.23300000000000001 -0.307 0.75" euler="0 -0 0" mesh="base_link"/>
+      <camera name="angle" pos="0 0 1.5" fovy="78"/>
+      <freejoint name="freejoint"/>
+      <body name="fl_castor_link" pos="0.18955 0.17000000000000001 0.111911" euler="-1.57 0 0">
+        <inertial pos="0 0 0" mass="1" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="fl_castor_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 1.3877787807814457e-17 0" euler="0 -0 0" mesh="castor_joint"/>
+        <joint name="fl_castor_wheel" class="unused" type="hinge" pos="0 1.3877787807814457e-17 0" axis="0 0.99999999999994682 -3.269630158841963e-07" limited="true" range="-0.1 0.1" damping="20"/>
+        <body name="fl_wheel_link" pos="-0.021807999999999994 0.067000020961748577 -3.5390642372234993e-07" euler="0 -0 0">
+          <inertial pos="0 0 0" mass="1" fullinertia="0.31309999999999999 0.31309999999999999 0.1361 0 0 0"/>
+          <geom name="fl_wheel_link_collision" class="unused" type="mesh" group="3" friction="0.20000000000000001 0.0050000000000000001 0.0001" pos="0 0 2.7755575615628914e-17" euler="0 -0 0" mesh="castor"/>
+          <geom name="fl_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 2.7755575615628914e-17" euler="0 -0 0" mesh="castor"/>
+          <joint name="fl_wheel" class="unused" type="hinge" pos="0 0 2.7755575615628914e-17" axis="0 3.269630158841963e-07 0.99999999999994682" limited="true" range="-0.1 0.1" damping="20"/>
+        </body>
+      </body>
+      <body name="fr_castor_link" pos="0.18955 -0.17000000000000001 0.111911" euler="-1.57 0 0">
+        <inertial pos="0 0 0" mass="1" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="fr_castor_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0" euler="0 -0 0" mesh="castor_joint"/>
+        <joint name="fr_castor_wheel" class="unused" type="hinge" pos="0 0 0" axis="0 0.99999999999994682 -3.269630158841963e-07" limited="true" range="-0.1 0.1" damping="20"/>
+        <body name="fr_wheel_link" pos="-0.021807999999999994 0.067000020961748563 -3.5390642372234993e-07" euler="0 -0 0">
+          <inertial pos="0 0 0" mass="1" fullinertia="0.31309999999999999 0.31309999999999999 0.1361 0 0 0"/>
+          <geom name="fr_wheel_link_collision" class="unused" type="mesh" group="3" friction="0.20000000000000001 0.0050000000000000001 0.0001" pos="0 -2.0816681711721685e-17 0" euler="0 -0 0" mesh="castor"/>
+          <geom name="fr_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 -2.0816681711721685e-17 0" euler="0 -0 0" mesh="castor"/>
+          <joint name="fr_wheel" class="unused" type="hinge" pos="0 -2.0816681711721685e-17 0" axis="0 3.269630158841963e-07 0.99999999999994682" limited="true" range="-0.1 0.1" damping="20"/>
+        </body>
+      </body>
+      <body name="left_wheel_link" pos="0 0.17000000000000001 0.067" euler="0 -0 0">
+        <inertial pos="0 0 0" mass="6" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="left_wheel_link_collision" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0 5.5511151231257827e-17 0" euler="0 -0 0" mesh="tracer_wheel"/>
+        <geom name="left_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 5.5511151231257827e-17 0" euler="0 -0 0" mesh="tracer_wheel"/>
+        <joint name="left_wheel" class="unused" type="hinge" pos="0 0 0" axis="0 1 0" damping="20"/>
+      </body>
+      <body name="right_wheel_link" pos="0 -0.17000000000000001 0.067" euler="0 -0 0">
+        <inertial pos="0 0 0" mass="6" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="right_wheel_link_collision" class="unused" type="mesh" group="3" friction="1 0.0050000000000000001 0.0001" pos="0 0 0" euler="0 -0 0" mesh="tracer_wheel"/>
+        <geom name="right_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0" euler="0 -0 0" mesh="tracer_wheel"/>
+        <joint name="right_wheel" class="unused" type="hinge" pos="0 0 0" axis="0 1 0"  damping="20"/>
+      </body>
+      <body name="rl_castor_link" pos="-0.18955 0.17000000000000001 0.111911" euler="-1.57 0 0">
+        <inertial pos="0 0 0" mass="1" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="rl_castor_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 1.3877787807814457e-17 0" euler="0 -0 0" mesh="castor_joint"/>
+        <joint name="rl_castor_wheel" class="unused" type="hinge" pos="0 1.3877787807814457e-17 0" axis="0 0.99999999999994682 -3.269630158841963e-07" limited="true" range="-0.1 0.1" damping="20"/>
+        <body name="rl_wheel_link" pos="-0.021807999999999994 0.067000020961748577 -3.5390642372234993e-07" euler="0 -0 0">
+          <inertial pos="0 0 0" mass="1" fullinertia="0.31309999999999999 0.31309999999999999 0.1361 0 0 0"/>
+          <geom name="rl_wheel_link_collision" class="unused" type="mesh" group="3" friction="0.20000000000000001 0.0050000000000000001 0.0001" pos="0 0 2.7755575615628914e-17" euler="0 -0 0" mesh="castor"/>
+          <geom name="rl_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 2.7755575615628914e-17" euler="0 -0 0" mesh="castor"/>
+          <joint name="rl_wheel" class="unused" type="hinge" pos="0 0 2.7755575615628914e-17" axis="0 3.269630158841963e-07 0.99999999999994682" limited="true" range="-1 1" damping="20"/>
+        </body>
+      </body>
+      <body name="rr_castor_link" pos="-0.18955 -0.17000000000000001 0.111911" euler="-1.57 0 0">
+        <inertial pos="0 0 0" mass="1" fullinertia="0.71709999999999996 0.1361 0.71709999999999996 0 0 0"/>
+        <geom name="rr_castor_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 0 0" euler="0 -0 0" mesh="castor_joint" />
+        <joint name="rr_castor_wheel" class="unused" type="hinge" pos="0 0 0" axis="0 0.99999999999994682 -3.269630158841963e-07" limited="true" range="-0.1 0.1" damping="20"/>
+        <body name="rr_wheel_link" pos="-0.021807999999999994 0.067000020961748563 -3.5390642372234993e-07" euler="0 -0 0">
+          <inertial pos="0 0 0" mass="1" fullinertia="0.31309999999999999 0.31309999999999999 0.1361 0 0 0"/>
+          <geom name="rr_wheel_link_collision" class="unused" type="mesh" group="3" friction="0.20000000000000001 0.0050000000000000001 0.0001" pos="0 -2.0816681711721685e-17 0" euler="0 -0 0" mesh="castor"/>
+          <geom name="rr_wheel_link_visual" class="unused" type="mesh" contype="0" conaffinity="0" group="0" pos="0 -2.0816681711721685e-17 0" euler="0 -0 0" mesh="castor"/>
+          <joint name="rr_wheel" class="unused" type="hinge" pos="0 -2.0816681711721685e-17 0" axis="0 3.269630158841963e-07 0.99999999999994682" limited="true" range="-1 1" damping="20"/>
+        </body>
+      </body>
+      <body name="fl_link1" pos="0.233 0.3 0.8012">
+      <inertial pos="0.00609525 -0.00429682 0.017959" quat="0.680193 0.680193 -0.193229 0.193229" mass="0.0608351" diaginertia="8.61803e-05 6.38197e-05 3e-05"/>
+      <joint name="fl_joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-3.14158 3.14158" damping="20"/>
+      <geom type="mesh" group="1" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link1"/>
+      <body name="fl_link2" pos="0.02 0 0.0402">
+        <inertial pos="-0.132382 0.00220381 0.00011179" quat="0 0.706195 0 0.708017" mass="1.07333" diaginertia="0.0160201 0.01596 0.000499897"/>
+        <joint name="fl_joint2" pos="0 0 0" axis="0 1 0" limited="true" range="0 3.14158" damping="100"/>
+        <geom type="mesh" group="1" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link2"/>
+        <body name="fl_link3" pos="-0.264 0 0" quat="-3.67321e-06 -1 0 0">
+          <inertial pos="0.187203 -0.000305676 -0.0514833" quat="0.269626 0.618013 0.251786 0.694238" mass="0.499405" diaginertia="0.00388848 0.00385541 0.000286113"/>
+          <joint name="fl_joint3" pos="0 0 0" axis="0 1 0" limited="true" range="0 3.14158" damping="20"/>
+          <geom type="mesh" group="1" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link3"/>
+          <body name="fl_link4" pos="0.245 0 -0.056">
+            <inertial pos="0.0388885 0.00295169 -0.0353283" quat="0.913916 -0.0752199 0.315785 -0.243679" mass="0.0809713" diaginertia="0.000184798 0.000152076 5.31251e-05"/>
+            <joint name="fl_joint4" pos="0 0 0" axis="0 1 0" limited="true" range="-2 1.67" damping="5" />
+            <geom type="mesh" density="2.83" rgba="0.898039 0.917647 0.929412 1" mesh="link4"/>
+            <body name="fl_link5" pos="0.06575 -0.001 -0.0825">
+              <inertial pos="0.00289957 3.15827e-05 0.0526189" quat="0.998829 0 -0.0483866 0" mass="0.602357" diaginertia="0.000724856 0.00069 0.000205144"/>
+              <joint name="fl_joint5" pos="0 0 0" axis="0 0 1" limited="true" range="-1.5708 1.5708" damping="2" />
+              <geom type="mesh" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link5"/>
+              <body name="fl_link6" pos="0.02845 0 0.0825" quat="-3.67321e-06 -1 0 0">
+                <camera name="fl_dabai" pos="0.0494 0 0.07134" euler="0 -1.221 -1.57" fovy="41" />
+                <inertial pos="0.0471798 0.00010297 -0.000138511" quat="0.495436 0.504523 -0.504523 0.495436" mass="0.462245" diaginertia="0.000910182 0.00068 0.000359818"/>
+                <joint name="fl_joint6" pos="0 0 0" axis="1 0 0" limited="true" range="-3.14158 3.14158" damping="0.1"/>
+                <geom type="mesh" density="2.83" rgba="0.898039 0.917647 0.929412 1" mesh="link6"/>
+                <body name="fl_link7" pos="0.073574 0.024629 0">
+                  <body name="camera_focus" pos="0.15 0 0.01">
+                    <site pos="0 0 0" size="0.01" type="sphere" name="left_cam_focus" rgba="0 0 1 0"/>
+                  </body>
+                  <inertial pos="-0.000327643 -0.00482005 -0.00167541" quat="0.5 0.5 0.5 0.5" mass="0.0484017" diaginertia="2e-05 2e-05 1e-05"/>
+                  <joint name="fl_joint7" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="0 0.04765" damping="100" />
+                  <geom solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" density="1.1" rgba="0.898039 0.917647 0.929412 1" mesh="link7" name='fl_7'/>
+                </body>
+               
+                <body name="fl_link8" pos="0.073574 -0.024629 0">
+                  <inertial pos="-0.000327644 0.00482005 0.000752973" quat="0.5 0.5 0.5 0.5" mass="0.0484017" diaginertia="2e-05 2e-05 1e-05"/>
+                  <joint name="fl_joint8" pos="0 0 0" axis="0 -1 0" type="slide" limited="true" range="0 0.04765" damping="100" />
+                  <geom  solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" density="1.1" rgba="0.898039 0.917647 0.929412 1" mesh="link8" name='fl_8'/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body> 
+    </body>
+    <body name="fr_link1" pos="0.234 -0.303 0.8012">
+      <inertial pos="0.00609525 -0.00429682 0.017959" quat="0.680193 0.680193 -0.193229 0.193229" mass="0.0608351" diaginertia="8.61803e-05 6.38197e-05 3e-05"/>
+      <joint name="fr_joint1" pos="0 0 0" axis="0 0 1" limited="true" range="-10 10" damping="20" />
+      <geom type="mesh" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link1" />
+      <body name="fr_link2" pos="0.02 0 0.0402">
+        <inertial pos="-0.132382 0.00220381 0.00011179" quat="0 0.706195 0 0.708017" mass="1.07333" diaginertia="0.0160201 0.01596 0.000499897"/>
+        <joint name="fr_joint2" pos="0 0 0" axis="0 1 0" limited="true" range="-10 10" damping="100"/>
+        <geom type="mesh" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link2"/>
+        <body name="fr_link3" pos="-0.264 0 0" quat="-3.67321e-06 -1 0 0">
+          <inertial pos="0.187203 -0.000305676 -0.0514833" quat="0.269626 0.618013 0.251786 0.694238" mass="0.499405" diaginertia="0.00388848 0.00385541 0.000286113"/>
+          <joint name="fr_joint3" pos="0 0 0" axis="0 1 0" limited="true" range="-10 10" damping="20" />
+          <geom type="mesh" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link3"/>
+          <body name="fr_link4" pos="0.245 0 -0.056">
+            <inertial pos="0.0388885 0.00295169 -0.0353283" quat="0.913916 -0.0752199 0.315785 -0.243679" mass="0.0809713" diaginertia="0.000184798 0.000152076 5.31251e-05"/>
+            <joint name="fr_joint4" pos="0 0 0" axis="0 1 0" limited="true" range="-10 10" damping="5" />
+            <geom type="mesh" density="2.83" rgba="0.898039 0.917647 0.929412 1" mesh="link4"/>
+            <body name="fr_link5" pos="0.06575 -0.001 -0.0825">
+              <inertial pos="0.00289957 3.15827e-05 0.0526189" quat="0.998829 0 -0.0483866 0" mass="0.602357" diaginertia="0.000724856 0.00069 0.000205144"/>
+              <joint name="fr_joint5" pos="0 0 0" axis="0 0 1" limited="true" range="-10 10" damping="2" />
+              <geom type="mesh" density="2.83" rgba="0.752941 0.752941 0.752941 1" mesh="link5"/>
+              <body name="fr_link6" pos="0.02845 0 0.0825" quat="-3.67321e-06 -1 0 0">
+                <camera name="fr_dabai" pos="0.0275 0 0.0585" euler="0 -1.4 -1.57" fovy="41" />
+                <inertial pos="0.0471798 0.00010297 -0.000138511" quat="0.495436 0.504523 -0.504523 0.495436" mass="0.462245" diaginertia="0.000910182 0.00068 0.000359818"/>
+                <joint name="fr_joint6" pos="0 0 0" axis="1 0 0" limited="true" range="-10 10" damping="0.1"/>
+                <geom type="mesh" density="2.83" rgba="0.898039 0.917647 0.929412 1" mesh="link6"/>
+                <body name="fr_link7" pos="0.073574 0.024629 0">
+                  <inertial pos="-0.000327643 -0.00482005 -0.00167541" quat="0.5 0.5 0.5 0.5" mass="0.0484017" diaginertia="2e-05 2e-05 1e-05"/>
+                  <joint name="fr_joint7" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="0 0.04765" damping="100" />
+                  <geom  solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" density="1.1" rgba="0.898039 0.917647 0.929412 1" mesh="link7" name='fr_7'/>
+                </body>
+                <body name="fr_link8" pos="0.073574 -0.024629 0">
+                  <inertial pos="-0.000327644 0.00482005 0.000752973" quat="0.5 0.5 0.5 0.5" mass="0.0484017" diaginertia="2e-05 2e-05 1e-05"/>
+                  <joint name="fr_joint8" pos="0 0 0" axis="0 -1 0" type="slide" limited="true" range="0 0.04765" damping="100" />
+                  <geom solimp="2 1 0.01" solref="0.01 1" friction="1 0.005 0.0001" type="mesh" density="1.1" rgba="0.898039 0.917647 0.929412 1" mesh="link8" name='fr_8'/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+     
+      
+    </body>
+    
+    <body name="box" pos="0.52 0.1 0.80">
+             <joint name="red_box_joint" type="free"/>
+            <inertial pos="0 0 0" mass="0.1" diaginertia="0.002 0.002 0.002" />
+            <geom condim="4" solimp="2 1 0.01" solref="0.01 1" friction="3 3 3" pos="0 0 0" size="0.02 0.02 0.02" type="box" name="red_box" rgba="1 0 0 1" />
+    </body>
+
+   <camera name="left_pillar" pos="0.7 -0.1 0.9" fovy="78" mode="targetbody" target="table1"/>
+    <camera name="right_pillar" pos="0.5 0.2 0.6" fovy="78" mode="targetbody" target="table1"/>
+    <camera name="top" pos="0 0 3" fovy="78" mode="fixed"/>
+    
+    <camera name="front_close" pos="0.5 0 1" fovy="78" mode="targetbody" target="camera_focus"/>
+  </worldbody>
+  <actuator>
+    <velocity name="r_wheel_vel" kv='160' user="1" joint="right_wheel"/>
+    <velocity name="l_wheel_vel" kv='160' user="1" joint="left_wheel"/>
+    
+    <position name="fl_joint1" ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="fl_joint1" kp="10000"  user="1" forcelimited="true" forcerange="-50000 50000"/>
+    <position name="fl_joint2" ctrllimited="true" ctrlrange="0 3.14158" joint="fl_joint2" kp="2000"  user="1" forcelimited="true" forcerange="-20000 20000"/>
+    <position name="fl_joint3" ctrllimited="true" ctrlrange="0 3.14158" joint="fl_joint3" kp="500"  user="1" forcelimited="true" forcerange="-1000 1000"/>
+    <position name="fl_joint4" ctrllimited="true" ctrlrange="-2 1.67" joint="fl_joint4" kp="50"  user="1" forcelimited="true" forcerange="-70 70"/>
+    <position name="fl_joint5" ctrllimited="true" ctrlrange="-1.5708 1.5708" joint="fl_joint5" kp="20"  user="1" forcelimited="true" forcerange="-50 50"/>
+    <position name="fl_joint6" ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="fl_joint6" kp="5"  user="1" forcelimited="true" forcerange="-6 6"/>
+    <position name="fl_joint7" ctrllimited="true" ctrlrange="0 0.0475" joint="fl_joint7" kp="10000"  user="1" forcelimited="true" forcerange="-100 100"/>
+    <position name="fl_joint8" ctrllimited="true" ctrlrange="0 0.0475" joint="fl_joint8" kp="10000"  user="1" forcelimited="true" forcerange="-100 100"/>
+
+    <position name="fr_joint1" ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="fr_joint1" kp="10000"  user="1" forcelimited="true" forcerange="-50000 50000"/>
+    <position name="fr_joint2" ctrllimited="true" ctrlrange="0 3.14158" joint="fr_joint2" kp="10000"  user="1" forcelimited="true" forcerange="-50000 50000"/>
+    <position name="fr_joint3" ctrllimited="true" ctrlrange="0 3.14158" joint="fr_joint3" kp="500"  user="1" forcelimited="true" forcerange="-1000 1000"/>
+    <position name="fr_joint4" ctrllimited="true" ctrlrange="-2 1.67" joint="fr_joint4" kp="50"  user="1" forcelimited="true" forcerange="-70 70"/>
+    <position name="fr_joint5" ctrllimited="true" ctrlrange="-1.5708 1.5708" joint="fr_joint5" kp="20"  user="1" forcelimited="true" forcerange="-50 50"/>
+    <position name="fr_joint6" ctrllimited="true" ctrlrange="-3.14158 3.14158" joint="fr_joint6" kp="5"  user="1" forcelimited="true" forcerange="-6 6"/>
+    <position name="fr_joint7" ctrllimited="true" ctrlrange="0 0.0475" joint="fr_joint7" kp="10000"  user="1" forcelimited="true" forcerange="-100 100"/>
+    <position name="fr_joint8" ctrllimited="true" ctrlrange="0 0.0475" joint="fr_joint8" kp="10000"  user="1" forcelimited="true" forcerange="-100 100"/>
+  </actuator>
+</mujoco>
